@@ -1,0 +1,16 @@
+.streamCard {
+  padding-bottom: 56px;
+
+  h4 {
+    margin-bottom: 24px !important;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media(max-width: 992px) {
+    padding-bottom: 16px;
+  }
+}

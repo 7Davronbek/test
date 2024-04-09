@@ -1,0 +1,27 @@
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.imageStyle {
+  width: 100%;
+  cursor: pointer
+}
+
+.desktop {
+  display: flex;
+
+  @media(max-width: 1200px) {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+
+  @media(max-width: 1200px) {
+    display: block;
+  }
+}

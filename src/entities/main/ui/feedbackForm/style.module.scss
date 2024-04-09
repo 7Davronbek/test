@@ -1,0 +1,43 @@
+.feedbackForm {
+
+  padding: 24px 0 95px;
+
+  label {
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  .btn {
+    margin-left: auto;
+    display: block;
+    cursor: pointer;
+
+    div {
+
+      @media(max-width: 992px) {
+        justify-content: center;
+      }
+    }
+
+    @media(max-width: 992px) {
+      margin-left: 20px;
+      justify-content: center;
+    }
+  }
+
+  input {
+    padding: 10px
+  }
+
+  .gridWrap {
+
+    @media(max-width: 992px) {
+      max-width: 100%;
+    }
+  }
+
+  @media(max-width: 992px) {
+    flex-direction: column;
+    padding-bottom: 60px;
+  }
+}
