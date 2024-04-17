@@ -15,35 +15,45 @@ export const HeaderDesktop = () => {
           src={banner1}
           className={sx.imageStyle}
           alt="T MED"
-          loading={'eager'}
+          priority
+          width={0}
+          height={0}
         />
       </Grid>
-      <Grid className={sx.flex} item xs={4}>
+      <Grid display={'flex'} alignItems={'center'} flexDirection={'column'} justifyContent={'space-between'} item xs={4}>
         <Image
           src={banner2}
           className={sx.imageStyle}
           alt="T MED"
-          loading={'eager'}
+          priority
+          width={0}
+          height={0}
         />
         <Image
           src={banner3}
           className={sx.imageStyle}
           alt="T MED"
-          loading={'eager'}
+          priority
+          width={0}
+          height={0}
         />
       </Grid>
-      <Grid className={sx.flex} item xs={4}>
+      <Grid display={'flex'} alignItems={'center'} flexDirection={'column'} justifyContent={'space-between'} item xs={4}>
         <Image
           src={banner4}
           className={sx.imageStyle}
           alt="T MED"
-          loading={'eager'}
+          width={0}
+          height={0}
+          priority
         />
         <Image
           src={banner5}
           className={sx.imageStyle}
           alt="T MED"
-          loading={'eager'}
+          priority
+          width={0}
+          height={0}
         />
       </Grid>
     </Grid>

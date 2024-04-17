@@ -4,7 +4,7 @@ import { Box, Stack, SxProps } from '@mui/material'
 type Props = {
   icon?: ReactNode,
   text?: string,
-  active?: boolean
+  active?: boolean,
 }
 export const BaseButton: FC<Props> = ({ icon, text, active }) => {
   return (
@@ -28,6 +28,7 @@ const sx: SxProps = {
 
   '.text': {
     fontWeight: 600,
+    userSelect: 'none',
   },
 
   '.icon': {
@@ -37,9 +38,22 @@ const sx: SxProps = {
 
   '&.active, &:hover': {
     background: 'var(--gradient-bg) !important',
-    padding: '12px 20px',
     borderRadius: '10px',
     color: '#fff',
     whiteSpace: 'nowrap',
+
+    '.active': {
+
+      'path': {
+        fill: '#fff',
+        stroke: 'transparent',
+      }
+    }
   },
+
+  '&:hover': {
+    'path': {
+      stroke: '#fff',
+    },
+  }
 }

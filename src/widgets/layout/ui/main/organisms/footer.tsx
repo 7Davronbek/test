@@ -1,29 +1,48 @@
+'use client'
 import { Grid, TextField } from '@mui/material'
 import footerBg from '@/assets/images/footer.png'
 import Image from 'next/image'
 import sx from '../style/main.module.scss'
-import { Icon } from '@/shared'
+import { Icon, sendFeedback } from '@/shared'
 import qr from '@/assets/images/qr.png'
 import card from '@/assets/images/card.png'
+import { useTranslations } from 'next-intl'
+import React, { useState } from 'react'
+import InputMask from 'react-input-mask'
 
 export const Footer = () => {
+  const [phone, setPhone] = useState('+998')
+  const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations('Main')
+
+  const sendFeedbackForm = async () => {
+    setIsLoading(true)
+    await sendFeedback({ phone })
+    setIsLoading(false)
+    setPhone('+998')
+  }
   return (
     <div className={sx.footer}>
       <div className={sx.footerBg}><Image src={footerBg} alt={'footer'} /></div>
       <div className={'container'}>
-        <Grid className={sx.top} container spacing={1}>
+        <Grid alignItems={'center'} className={sx.top} container spacing={1}>
           <Grid xs={12} item xl={1.5}>
             <Icon.TmedLogo isWhite={true} />
           </Grid>
           <Grid xs={12} item xl={5.5}>
-            <h1>Agar sizda biron bir savol yoki taklif bo&apos;lsa, iltimos, ma&apos;lumotlaringizni qoldiring va biz imkon qadar
-              tezroq siz bilan bog&apos;lanamiz.</h1>
+            <h1>{t('questionOrSuggestion')}</h1>
           </Grid>
           <Grid xs={12} className={sx.bottom} item xl={5}>
-            <TextField style={{ width: '75%' }} placeholder={'+998_'} className={sx.input} variant={'outlined'}
-                       type="text" />
+            <InputMask
+              mask="+998 (99) 999-99-99"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
+              disabled={false}
+              placeholder={'+998_'}
+              className={sx.inputMask}
+            />
 
-            <a>Yuborish</a>
+            <a onClick={sendFeedbackForm}>{t('send')}</a>
           </Grid>
         </Grid>
         <Grid container className={sx.bottomNav}>
@@ -32,23 +51,23 @@ export const Footer = () => {
           </Grid>
           <Grid item xs={12} xl={5} className={sx.wrap}>
             <div>
-              <a>Mobil ilova</a>
-              <a>Yordam va fikr-mulohaza</a>
-              <a>Pullik xizmatlar</a>
+              <a>{t('mobileApp')}</a>
+              <a>{t('helpAndFeedback')}</a>
+              <a>{t('paidServices')}</a>
             </div>
             <div>
-              <a>Foydalanish shartlari</a>
-              <a>Maxfiylik siyosati</a>
-              <a>Saytda reklama</a>
+              <a>{t('termsOfUse')}</a>
+              <a>{t('privacyPolicy')}</a>
+              <a>{t('webAds')}</a>
             </div>
           </Grid>
           <Grid item xs={12} xl={3}>
-            <p>To&apos;lov usuli</p>
+            <p>{t('paymentMethods')}</p>
             <Image style={{ width: '100%', height: 'auto' }} src={card} alt={'Payments'} />
           </Grid>
         </Grid>
       </div>
-      <h6>©2024 T-med.uz. All Rights Reserved. </h6>
+      <h6>©2024 T-med.uz. {t('allRightReserved')} </h6>
     </div>
   )
 }

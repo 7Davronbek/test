@@ -3,13 +3,15 @@ import raxbar from '@/assets/images/raxbar.jpg'
 import raxbar2 from '@/assets/images/raxbar2.jpg'
 import { AdministrationsCard } from '@/shared'
 import sx from './style.module.scss'
+import { useTranslations } from 'next-intl'
 
 export const Managers = () => {
+  const t = useTranslations('Main')
   return (
     <div className={sx.managers}>
-      <h1 style={{ paddingBottom: '24px !important' }} className={'title'}>Rahbariyat</h1>
+      <h1 className={'title'}>{t('management')}</h1>
 
-      <Grid className={sx.gridWrap} container justifyContent={'space-around'}>
+      <Grid marginTop={4} className={sx.gridWrap} container>
 
         <AdministrationsCard email={'nvs@railway.uz'} image={raxbar} name={'MAMASIDIKOV MUXSINJON MUSAJONOVICH'}
                              phoneNumber={'+998 71 299-98-27'}

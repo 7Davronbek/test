@@ -59,6 +59,10 @@ a {
   color: #222;
 }
 
+img {
+  user-select: none;
+}
+
 .title {
   font-family: var(--font);
   font-size: 40px;

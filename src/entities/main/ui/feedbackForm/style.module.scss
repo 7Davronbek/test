@@ -7,6 +7,18 @@
     display: inline-block;
   }
 
+  .inputMask {
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    padding: 12px;
+
+    &:focus-visible {
+      border-color: #007aff;
+    }
+  }
+
   .btn {
     margin-left: auto;
     display: block;

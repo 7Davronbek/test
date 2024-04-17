@@ -25,6 +25,17 @@
       display: flex;
       align-items: center;
 
+      .inputMask {
+        width: 75%;
+        background-color: transparent;
+        border: 1px solid #7F92A0;
+        outline: none;
+        box-shadow: none;
+        padding: 16px 12px;
+        border-radius: 6px;
+        color: #fff;
+      }
+
       .input {
         color: #fff;
         border-color: #fff;
@@ -197,6 +208,23 @@
     }
   }
 
+  .blur {
+    visibility: hidden;
+    opacity: 0;
+
+    @media(max-width: 1000px) {
+      position: fixed;
+      background: #0000008C;
+      backdrop-filter: blur(40px);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 111;
+      transition: all .4s ease-in-out;
+    }
+  }
+
   .mobile {
 
     @media(max-width: 1000px) {
@@ -204,7 +232,7 @@
       flex-direction: column;
       z-index: 999;
       align-items: center;
-      width: 100%;
+      width: 80%;
       height: 100vh;
       top: 0;
       right: 0;
@@ -214,8 +242,22 @@
       transition: all .6s ease-in-out;
       justify-content: space-around;
 
+      a {
+        width: 100%;
+
+        div {
+          align-items: start;
+          justify-content: start;
+        }
+      }
+
       &.active {
         transform: translateX(0);
+
+        & ~ .blur {
+          visibility: visible;
+          opacity: 1;
+        }
       }
     }
   }
@@ -241,8 +283,35 @@
   .mobileContent {
     display: none;
 
+    .socialWrap {
+      margin-bottom: 16px;
+
+      .iconWrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .feedbackWrap {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        gap: 16px;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
     @media(max-width: 1000px) {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -265,10 +334,6 @@
   align-items: center;
   justify-content: space-between;
 
-  .menu {
-    background-color: red;
-  }
-
   h5 {
     font-size: 16px;
     font-weight: 400;
@@ -288,13 +353,30 @@
       font-weight: 400;
       line-height: 20px;
     }
+
+    .select {
+      background-color: transparent;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      padding: 3px;
+
+      * {
+        color: #000;
+      }
+    }
+  }
+
+  .middle {
+    margin-left: 150px;
+
+    @media(max-width: 1000px) {
+      display: none;
+    }
   }
 
   .left {
     margin-left: 35px;
-  }
-
-  @media(max-width: 1000px) {
-    display: none;
   }
 }

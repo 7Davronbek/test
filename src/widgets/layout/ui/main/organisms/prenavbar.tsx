@@ -1,26 +1,18 @@
-'use client'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import React from 'react'
 import { Icon } from '@/shared'
 import sx from '../style/main.module.scss'
+import { NavbarSelect } from '@/widgets/layout/ui/main/molecules'
+import { useTranslations } from 'next-intl'
 
 export const PreNavbar = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLHeadingElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const t = useTranslations('Main')
   return (
     <div className={sx.prenavbar}>
       <h5 className={sx.wrap}>
         <Icon.Location width={24} height={24} color={'#00C1C1'} /> Toshkent <Icon.ArrowDown color={'#fff'} />
       </h5>
 
-      <div className={sx.wrap}>
+      <div className={sx.wrap + ' ' + sx.middle}>
         <a target={'_blank'} rel={'noreferrer'} href={'https://www.instagram.com/nsurailway'}
            className={sx.icon}><Icon.Instagram /></a>
         <a target={'_blank'} rel={'noreferrer'} href={'https://www.facebook.com/nsurailways'}
@@ -35,30 +27,14 @@ export const PreNavbar = () => {
         <div className={sx.left}></div>
 
         <a target={'_blank'} rel={'noreferrer'} href={'https://t.me/Medic_UTY'}
-           className={sx.wrap}><Icon.TelegramOutline /> Onlayn konsultatsiya</a>
+           className={sx.wrap}><Icon.TelegramOutline /> {t('onlineConsultation')}</a>
         <div className={sx.left}></div>
-        <a href={'tel: +998 (71) 299 98 27'} className={sx.wrap}><Icon.Phone width={24} height={24}
-                                                                             color={'#00C1C1'} /> +998 (71) 299 98
-          27</a>
+        <a href={'tel: +998 (71) 299 98 27'} className={sx.wrap}><Icon.Phone width={24} height={24} color={'#00C1C1'} /> +998 (71) 299 98 27</a>
 
         <div className={sx.left}></div>
 
-        <h5 className={sx.wrap} onClick={(e) => handleClick(e)}>
-          <Icon.Lang /> Uzbek <Icon.ArrowDown color={'#fff'} />
-        </h5>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem onClick={handleClose}>Russian</MenuItem>
-          <MenuItem onClick={handleClose}>English</MenuItem>
-        </Menu>
       </div>
+      <NavbarSelect />
     </div>
   )
 }

@@ -32,28 +32,40 @@ export const HeaderMobile = () => {
           <Image
             src={banner1}
             alt="T MED"
+            width={0}
+            height={0}
             style={{width: '100%', height: 'auto'}}
+            priority
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src={banner1}
             alt="T MED"
+            width={0}
+            height={0}
             style={{width: '100%', height: 'auto'}}
+            priority
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src={banner1}
             alt="T MED"
+            width={0}
+            height={0}
             style={{width: '100%', height: 'auto'}}
+            priority
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src={banner1}
             alt="T MED"
+            width={0}
+            height={0}
             style={{width: '100%', height: 'auto'}}
+            priority
           />
         </SwiperSlide>
       </Swiper>

@@ -6,6 +6,8 @@
   }
 
   .gridWrap {
+    justify-content: start;
+    gap: 20px;
 
     @media(max-width: 1200px) {
       gap: 18px;

@@ -2,25 +2,35 @@
 import Link from 'next/link'
 import { FC } from 'react'
 import sx from '../style/navbar.module.scss'
-import { BaseButton } from '@/shared'
-import { usePathname } from 'next/navigation'
+import { AppPathEnum, BaseButton, NavLink } from '@/shared'
+import { useLocale, useTranslations } from 'next-intl'
 
 type Props = {
   title: string
 }
 export const AboutNavbar: FC<Props> = ({ title }) => {
-  const router = usePathname()
-  const isActive = (path: string): boolean => {
-    return path === router
-  }
+  const t = useTranslations('AboutUs')
+  const tr = useTranslations('Main')
+  const local = useLocale()
   return (
     <div className={sx.aboutNavbar}>
       <h1 className={'title'}>{title}</h1>
       <div className={sx.wrap}>
-        <Link className={`${sx.myBtn} ${isActive('/about') ? sx.active : ''}`} href={'/about'}><BaseButton text={'Muassasa haqida'} /></Link>
-        <Link className={`${sx.myBtn} ${isActive('/about/management') ? sx.active : ''}`} href={'/about/management'}><BaseButton text={'Rahbariyat'} /></Link>
-        <Link className={`${sx.myBtn} ${isActive('/about/administration') ? sx.active : ''}`} href={'/about/administration'}><BaseButton text={'Adminstratsiya'} /></Link>
-        <Link className={`${sx.myBtn} ${isActive('/about/structure') ? sx.active : ''}`} href={'/about/structure'}><BaseButton text={'Struktura'} /></Link>
+        <Link className={`${sx.myBtn} ${NavLink.isActiveLink(`/${local + AppPathEnum.ABOUT}`) ? sx.active : ''}`}
+              href={`/${local + AppPathEnum.ABOUT}`}><BaseButton text={t('aboutInstitution')} />
+        </Link>
+        <Link
+          className={`${sx.myBtn} ${NavLink.isActiveLink(`/${local + AppPathEnum.ABOUT + AppPathEnum.MANAGEMENT}`) ? sx.active : ''}`}
+          href={`/${local + AppPathEnum.ABOUT + AppPathEnum.MANAGEMENT}`}><BaseButton text={tr('management')} />
+        </Link>
+
+        <Link className={`${sx.myBtn} ${NavLink.isActiveLink(`/${local + AppPathEnum.ABOUT + AppPathEnum.ADMINISTRATION}`) ? sx.active : ''}`}
+              href={`/${local + AppPathEnum.ABOUT + AppPathEnum.ADMINISTRATION}`}><BaseButton text={t('administration')} />
+        </Link>
+
+        <Link className={`${sx.myBtn} ${NavLink.isActiveLink(`/${local + AppPathEnum.ABOUT + AppPathEnum.STRUCTURE}`) ? sx.active : ''}`}
+              href={`/${local + AppPathEnum.ABOUT + AppPathEnum.STRUCTURE}`}><BaseButton text={t('structure')} />
+        </Link>
       </div>
     </div>
   )

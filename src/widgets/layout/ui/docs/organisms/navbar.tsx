@@ -1,41 +1,42 @@
 'use client'
 import sx from '../style/docs.module.scss'
 import Link from 'next/link'
-import { BaseButton } from '@/shared'
-import { usePathname } from 'next/navigation'
+import { AppPathEnum, BaseButton, NavLink } from '@/shared'
+import { useLocale, useTranslations } from 'next-intl'
 
 export const DocsNavbar = () => {
-  const router = usePathname()
-  const isActive = (path: string): boolean => {
-    return path === router
-  }
+  const t = useTranslations('Docs')
+  const locale = useLocale()
   return (
     <div className={sx.docsLayout}>
-      <h1 className={'title'}>Qonunchilik bazasi</h1>
+      <h1 className={'title'}>{t('laws')}</h1>
       <div className={sx.wrap}>
 
-        <Link className={`${sx.myBtn} ${isActive('/docs') ? sx.active : ''}`} href={'/docs'}><
-          BaseButton text={'Qonunlar'} />
+        <Link className={`${sx.myBtn} ${NavLink.isActiveLink(`/${locale + AppPathEnum.DOCS}`) ? sx.active : ''}`}
+              href={`/${locale + AppPathEnum.DOCS}`}><
+          BaseButton text={t('laws')} />
         </Link>
 
-        <Link className={`${sx.myBtn} ${isActive('/docs/presidential-decree') ? sx.active : ''}`}
-              href={'/docs/presidential-decree'}><
-          BaseButton text={'Prezident farmoni'} />
+        <Link
+          className={`${sx.myBtn} ${NavLink.isActiveLink(`/${locale + AppPathEnum.DOCS + AppPathEnum.PRESIDENTIAL_DECREE}`) ? sx.active : ''}`}
+          href={`/${locale + AppPathEnum.DOCS + AppPathEnum.PRESIDENTIAL_DECREE}`}><
+          BaseButton text={t('presidentialDecrees')} />
         </Link>
 
-        <Link className={`${sx.myBtn} ${isActive('/docs/ministerial-decision') ? sx.active : ''}`}
+        <Link
+          className={`${sx.myBtn} ${NavLink.isActiveLink(`/${locale + AppPathEnum.DOCS + AppPathEnum.MINISTERIAL_DECISION}`) ? sx.active : ''}`}
+          href={`/${locale + AppPathEnum.DOCS + AppPathEnum.MINISTERIAL_DECISION}`}><
+          BaseButton text={t('ministerDecrees')} />
+        </Link>
+
+        <Link className={`${sx.myBtn} ${NavLink.isActiveLink('/docs/ministerial-decision') ? sx.active : ''}`}
               href={'/docs/ministerial-decision'}><
-          BaseButton text={'Vazirlar mahkamasining qarorlari'} />
+          BaseButton text={t('railwayDecrees')} />
         </Link>
 
-        <Link className={`${sx.myBtn} ${isActive('/docs/ministerial-decision') ? sx.active : ''}`}
+        <Link className={`${sx.myBtn} ${NavLink.isActiveLink('/docs/ministerial-decision') ? sx.active : ''}`}
               href={'/docs/ministerial-decision'}><
-          BaseButton text={'Temir yo\'l transporti haqidagi qonun'} />
-        </Link>
-
-        <Link className={`${sx.myBtn} ${isActive('/docs/ministerial-decision') ? sx.active : ''}`}
-              href={'/docs/ministerial-decision'}><
-          BaseButton text={'SSV qarorlari'} />
+          BaseButton text={t('svvDecrees')} />
         </Link>
 
       </div>

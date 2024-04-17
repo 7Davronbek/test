@@ -3,8 +3,10 @@ import sx from './style.module.scss'
 import Image from 'next/image'
 import clinics from '@/assets/images/clinics.png'
 import { Icon } from '@/shared'
+import { useTranslations } from 'next-intl'
 
 export const CentralHospital = () => {
+  const t = useTranslations('Main')
   return (
     <div className={'centralHospital ' + sx.bg}>
       <div className="container">
@@ -12,12 +14,12 @@ export const CentralHospital = () => {
           <Grid className={'left ' + sx.gridWrap} item xs={6}>
 
             <div className={sx.card}>
-              <h1 className={'title ' + sx.title}>Markaziy klinik kasalxona</h1>
+              <h1 className={'title ' + sx.title}>{t('centralHospital')}</h1>
 
               <div className={sx.wrap}>
                 <span><Icon.Phone /></span>
                 <div>
-                  <h6>Telefon</h6>
+                  <h6>{t('phone')}</h6>
                   <a className={sx.a} href="tel: +998 71 299-63-02">+998 71 299-63-02</a>
                   <br />
                   <a className={sx.a} href="tel: +998 71 299-62-90">+998 71 299-62-90</a>
@@ -27,16 +29,16 @@ export const CentralHospital = () => {
               <div className={sx.wrap}>
                 <span><Icon.Calendar /></span>
                 <div>
-                  <h6>Ish grafigi</h6>
-                  <p className={sx.a}>Diagnostika: Du. - Sha. / 08:00 - 14:00 Statsionar: xar kuni</p>
+                  <h6>{t('workSchedule')}</h6>
+                  <p className={sx.a}>{t('scheduleDay')}</p>
                 </div>
               </div>
 
               <div className={sx.wrap}>
                 <span><Icon.Location /></span>
                 <div>
-                  <h6>Manzil</h6>
-                  <p className={sx.a}>Toshkent sh., Yashnabod tumani, Taraqqiyot kuchasi 2-proyezd, 12A uy</p>
+                  <h6>{t('location')}</h6>
+                  <p className={sx.a}>{t('locationDetail')}</p>
                 </div>
               </div>
 

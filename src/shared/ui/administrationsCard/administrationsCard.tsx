@@ -8,11 +8,13 @@ export const AdministrationsCard: FC<Manager> = ({ image, name, phoneNumber, adm
   return (
     <>
       <Grid className={sx.card} item xs={3.9}>
-        <div className={sx.wrap}>
+        <div className={sx.myWrap}>
           <Image
             src={image}
             alt="T MED"
-            style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+            width={0}
+            height={0}
+            className={sx.image}
           />
           <p className={sx.head}>{jobTitle}</p>
           <p className={sx.name}>{name}</p>
