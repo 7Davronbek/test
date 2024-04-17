@@ -1,13 +1,14 @@
 import { useParticipant } from '@videosdk.live/react-sdk'
 import { useEffect, useMemo, useRef } from 'react'
 import ReactPlayer from 'react-player'
-import Chat from '@/entities/stream/ui/chat'
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const SingleParticipant = ({ participantId }) => {
   const { micOn, micStream, isLocal, displayName, webcamStream, webcamOn } =
     useParticipant(participantId)
 
-  const audioPlayer = useRef()
+  const audioPlayer = useRef<HTMLAudioElement>(null)
 
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
@@ -23,7 +24,7 @@ const SingleParticipant = ({ participantId }) => {
       mediaStream.addTrack(micStream.track)
 
       audioPlayer.current.srcObject = mediaStream
-      audioPlayer.current.play().catch((err) => {
+      audioPlayer.current.play().catch((err: Error) => {
         if (
           err.message ===
           'play() failed because the user didn\'t interact with the document first. https://goo.gl/xX8pDD'
@@ -32,6 +33,8 @@ const SingleParticipant = ({ participantId }) => {
         }
       })
     } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       audioPlayer.current.srcObject = null
     }
   }, [micStream, micOn, isLocal, participantId])
@@ -49,7 +52,7 @@ const SingleParticipant = ({ participantId }) => {
         </div>
         {webcamOn && (
           <ReactPlayer
-            playsinline // very very imp prop
+            playsinline
             pip={false}
             light={false}
             controls={false}

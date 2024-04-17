@@ -1,5 +1,5 @@
 'use client'
-import { Grid, TextField } from '@mui/material'
+import { Grid } from '@mui/material'
 import footerBg from '@/assets/images/footer.png'
 import Image from 'next/image'
 import sx from '../style/main.module.scss'
@@ -42,7 +42,7 @@ export const Footer = () => {
               className={sx.inputMask}
             />
 
-            <a onClick={sendFeedbackForm}>{t('send')}</a>
+            <a style={{ opacity: `${isLoading ? '0.5' : '1'}` }} onClick={!isLoading ? sendFeedbackForm : () => {}}>{t('send')}</a>
           </Grid>
         </Grid>
         <Grid container className={sx.bottomNav}>

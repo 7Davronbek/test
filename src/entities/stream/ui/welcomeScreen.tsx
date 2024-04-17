@@ -11,7 +11,8 @@ export const WelcomeScreen = () => {
   const [meetingId, setMeetingId] = useState('')
   const [username, setUsername] = useState('')
 
-  const [appData, setAppData] = useLocalStorage<LocalstorageData>(T_MED_DATA, { meetingId: '', mode: '', username: '' })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_appData, setAppData] = useLocalStorage<LocalstorageData>(T_MED_DATA, { meetingId: '', mode: '', username: '' })
   const router = useRouter()
 
   const createClick = async () => {

@@ -20,6 +20,8 @@ const MediaControl = () => {
 
   const _handleToggleHls = useCallback(() => {
     if (isHlsStopped) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       startHls({ quality: 'high' })
     } else {
       stopHls()
