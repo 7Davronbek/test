@@ -31,5 +31,7 @@ CMD npm start
 FROM base as dev
 ENV NODE_ENV=development
 RUN npm install 
+RUN npm install typescript
+RUN npm install eslint
 COPY . .
 CMD npm run dev
