@@ -18,7 +18,7 @@ const ParticipantsGridContainer = () => {
           />
         </div>
       ))}
-      <Chat />
+        <Chat />
     </div>
   )
 }

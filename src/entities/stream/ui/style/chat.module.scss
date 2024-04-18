@@ -26,3 +26,33 @@
 .containerWrap {
   display: flex;
 }
+
+.button {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 20px;
+
+  svg {
+    transform: rotate(90deg);
+
+    path {
+      stroke: #fff;
+    }
+  }
+}
+
+.streamerVideo {
+  width: 100%;
+  height: 490px;
+  position: relative;
+
+  @media(max-width: 992px) {
+    height: 100%;
+  }
+}
+
+.streamerChat {
+  @media(max-width: 992px) {
+    display: none;
+  }
+}

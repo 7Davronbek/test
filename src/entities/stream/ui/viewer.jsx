@@ -11,7 +11,7 @@ import { authToken } from '@/shared/utils/createNewRoom'
 import { useRouter } from 'next/navigation'
 import Chat from '@/entities/stream/ui/chat'
 import useLocalStorage from 'use-local-storage'
-import { Loader, LocalstorageData, T_MED_DATA } from '@/shared'
+import {BaseButton, Icon, Loader, LocalstorageData, T_MED_DATA} from '@/shared'
 
 const HLSPlayer = () => {
   const { hlsUrls, hlsState } = useMeeting()
@@ -56,23 +56,24 @@ const HLSPlayer = () => {
 }
 
 import sx from './style/chat.module.scss'
+import {useLocale} from "next-intl";
 
 const Viewer = ({ meetingId, setAppData }) => {
   const router = useRouter()
+  const locale = useLocale()
   const [data] = useLocalStorage(T_MED_DATA, { mode: '', meetingId: '', username: '' })
   if (meetingId === null || meetingId === '') {
-    router.push('/en/stream')
+    // router.push('/uz/stream')
   }
   const handleClick = () => {
     setAppData({ meetingId: '', mode: '' })
-    router.push('/en/stream')
-    router.refresh()
+    router.back()
   }
   return (
     <MeetingProvider  token={authToken} config={{ meetingId, name: data.username, mode: 'VIEWER' }}
       joinWithoutUserInteraction
     >
-      <button onClick={handleClick}>back</button>
+      <button className={sx.button} onClick={handleClick}><BaseButton icon={<Icon.ArrowDown />}  active={true}/></button>
       <MeetingConsumer>
         {({ hlsState }) =>
           hlsState === Constants.hlsEvents.HLS_PLAYABLE ? (
@@ -81,7 +82,7 @@ const Viewer = ({ meetingId, setAppData }) => {
               <Chat />
             </div>
           ) : (
-            <Loader />
+            <p style={{textAlign: 'center'}}>Yuklanmoqda...</p>
           )
         }
       </MeetingConsumer>

@@ -1,6 +1,7 @@
 import { useParticipant } from '@videosdk.live/react-sdk'
 import { useEffect, useMemo, useRef } from 'react'
 import ReactPlayer from 'react-player'
+import sx from '../style/chat.module.scss'
 
 const SingleParticipant = ({ participantId }) => {
   const { micOn, micStream, isLocal, webcamStream, webcamOn } =
@@ -37,7 +38,7 @@ const SingleParticipant = ({ participantId }) => {
 
   return (
     <>
-      <div style={{ height: '490px', width: '100%', position: 'relative' }}>
+      <div className={sx.streamerVideo}>
         <audio autoPlay playsInline controls={false} ref={audioPlayer} />
         <div
           style={{ position: 'absolute', background: '#fff', padding: 8 }}

@@ -1,56 +1,59 @@
-import { useMeeting, Constants } from '@videosdk.live/react-sdk'
-import { useCallback, useEffect, useMemo } from 'react'
+import {useMeeting, Constants} from '@videosdk.live/react-sdk'
+import {useCallback, useEffect, useMemo} from 'react'
 import useLocalStorage from 'use-local-storage'
-import { LocalstorageData, T_MED_DATA } from '@/shared'
-import { useRouter } from 'next/navigation'
+import {BaseButton, Icon, LocalstorageData, T_MED_DATA} from '@/shared'
+import {useRouter} from 'next/navigation'
+import sx from "@/entities/stream/ui/style/chat.module.scss";
 
 const MediaControl = () => {
-  const { toggleMic, toggleWebcam, startHls, stopHls, hlsState, meetingId } =
-    useMeeting()
+    const {toggleMic, toggleWebcam, startHls, stopHls, hlsState, meetingId} =
+        useMeeting()
 
-  const { isHlsStarted, isHlsStopped, isHlsPlayable } = useMemo(
-    () => ({
-      isHlsStarted: hlsState === Constants.hlsEvents.HLS_STARTED,
-      isHlsStopped: hlsState === Constants.hlsEvents.HLS_STOPPED,
-      isHlsPlayable: hlsState === Constants.hlsEvents.HLS_PLAYABLE,
-    }),
-    [hlsState],
-  )
-  const router = useRouter()
+    const {isHlsStarted, isHlsStopped, isHlsPlayable} = useMemo(
+        () => ({
+            isHlsStarted: hlsState === Constants.hlsEvents.HLS_STARTED,
+            isHlsStopped: hlsState === Constants.hlsEvents.HLS_STOPPED,
+            isHlsPlayable: hlsState === Constants.hlsEvents.HLS_PLAYABLE,
+        }),
+        [hlsState],
+    )
+    const router = useRouter()
 
-  useEffect(() => {
+    useEffect(() => {
 
-  }, [isHlsStarted, isHlsStopped, isHlsPlayable])
+    }, [isHlsStarted, isHlsStopped, isHlsPlayable])
 
-  const _handleToggleHls = useCallback(() => {
-    if (isHlsStopped) {
-      startHls({ quality: 'high' })
-    } else {
-      stopHls()
+    const _handleToggleHls = useCallback(() => {
+        if (isHlsStopped) {
+            startHls({quality: 'high'})
+        } else {
+            stopHls()
+        }
+    }, [isHlsStopped, startHls, stopHls])
+
+    const [, setAppData] = useLocalStorage(T_MED_DATA, {mode: '', meetingId: '', username: ''})
+    const handleClick = () => {
+        setAppData({meetingId: '', mode: ''})
+        router.push('/en/stream')
+        router.refresh()
     }
-  }, [isHlsStopped, startHls, stopHls])
 
-  const [, setAppData] = useLocalStorage(T_MED_DATA, { mode: '', meetingId: '', username: '' })
-  const handleClick = () => {
-    setAppData({ meetingId: '', mode: '' })
-    router.push('/en/stream')
-    router.refresh()
-  }
-
-  return (
-    <div style={{ marginBottom: '20px' }}>
-      <button onClick={handleClick}>back</button>
-      <p>Meeting id: {meetingId}</p>
-      <p>Xolati: {hlsState}</p>
-      {isHlsStopped ? <h1>Stream is <span style={{ color: 'red' }}>stopped</span></h1> :
-        <h1>Is streaming</h1>}
-      <button onClick={() => toggleMic()}>Toggle Mic</button>
-      <button onClick={() => toggleWebcam()}>Toggle Webcam</button>
-      <button onClick={() => _handleToggleHls()}>
-        {isHlsStarted ? 'Stop Hls' : 'Start Hls'}
-      </button>
-    </div>
-  )
+    return (
+        <div style={{marginBottom: '20px'}}>
+            <button className={sx.button} onClick={handleClick}><BaseButton icon={<Icon.ArrowDown/>} active={true}/>
+            </button>
+            <p>Meeting id: {meetingId}</p>
+            <p>Xolati: {hlsState}</p>
+            <div style={{padding: '10px 0 0 0'}}></div>
+            <button className={sx.button} onClick={() => toggleMic()}><BaseButton active={true} text={'Mikrofon'}/>
+            </button>
+            <button className={sx.button} onClick={() => toggleWebcam()}><BaseButton active={true} text={'Kamera'}/>
+            </button>
+            <button className={sx.button} onClick={() => _handleToggleHls()}>
+                <BaseButton active={true} text={"Stream"}/>
+            </button>
+        </div>
+    )
 }
 
 export default MediaControl

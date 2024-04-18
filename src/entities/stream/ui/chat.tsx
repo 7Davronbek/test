@@ -3,6 +3,8 @@ import React, { FormEvent, useCallback, useEffect, useState } from 'react'
 import { usePubSub } from '@videosdk.live/react-sdk'
 import sx from './style/chat.module.scss'
 import { useRouter } from 'next/navigation'
+import {TextField} from "@mui/material";
+import {BaseButton} from "@/shared";
 
 const Chat = () => {
 
@@ -26,7 +28,7 @@ const Chat = () => {
   }, [messages])
 
   return (
-    <div className={sx.chat}>
+    <div className={sx.chat + ' ' +  sx.streamerChat}>
       <div className={sx.message}>
         {messages.map(item => {
           return (
@@ -38,8 +40,8 @@ const Chat = () => {
         })}
       </div>
       <form onSubmit={handleSubmit}>
-        <input value={input} onChange={e => setInput(e.target.value)} type="text" />
-        <button type={'submit'}>Send</button>
+        <TextField fullWidth value={input} onChange={e => setInput(e.target.value)} type="text" />
+        <button className={sx.button} type={'submit'}><BaseButton active={true} text={'Yuborish'} /></button>
       </form>
     </div>
   )
