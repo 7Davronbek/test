@@ -1,23 +1,24 @@
 import { useMeeting } from '@videosdk.live/react-sdk'
 import { useMemo } from 'react'
 import SingleParticipant from '@/entities/stream/ui/molecules/singleParticipant'
+import Chat from '@/entities/stream/ui/chat'
+import sx from '../style/chat.module.scss'
 
 const ParticipantsGridContainer = () => {
   const { participants } = useMeeting()
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   const participantIds = useMemo(() => [...participants.keys()], [participants])
 
   return (
-    <div>
-      {participantIds.map((participantId) => (
+    <div className={sx.containerWrap}>
+      {participantIds.slice(0,1).map((participantId) => (
         <div key={participantId}>
           <SingleParticipant
             {...{ participantId, key: participantId }}
           />
         </div>
       ))}
+      <Chat />
     </div>
   )
 }

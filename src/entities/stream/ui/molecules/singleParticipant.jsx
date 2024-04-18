@@ -2,13 +2,11 @@ import { useParticipant } from '@videosdk.live/react-sdk'
 import { useEffect, useMemo, useRef } from 'react'
 import ReactPlayer from 'react-player'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 const SingleParticipant = ({ participantId }) => {
-  const { micOn, micStream, isLocal, displayName, webcamStream, webcamOn } =
+  const { micOn, micStream, isLocal, webcamStream, webcamOn } =
     useParticipant(participantId)
 
-  const audioPlayer = useRef<HTMLAudioElement>(null)
+  const audioPlayer = useRef()
 
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
@@ -24,7 +22,7 @@ const SingleParticipant = ({ participantId }) => {
       mediaStream.addTrack(micStream.track)
 
       audioPlayer.current.srcObject = mediaStream
-      audioPlayer.current.play().catch((err: Error) => {
+      audioPlayer.current.play().catch((err) => {
         if (
           err.message ===
           'play() failed because the user didn\'t interact with the document first. https://goo.gl/xX8pDD'
@@ -33,20 +31,18 @@ const SingleParticipant = ({ participantId }) => {
         }
       })
     } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       audioPlayer.current.srcObject = null
     }
   }, [micStream, micOn, isLocal, participantId])
 
   return (
     <>
-      <div style={{ height: 400, width: '70%', position: 'relative' }}>
+      <div style={{ height: '490px', width: '100%', position: 'relative' }}>
         <audio autoPlay playsInline controls={false} ref={audioPlayer} />
         <div
-          style={{ position: 'absolute', background: '#ffffffb3', padding: 8 }}
+          style={{ position: 'absolute', background: '#fff', padding: 8 }}
         >
-          <p>Name: {displayName}</p>
+          {/* <p>Name: {displayName}</p> */}
           <p>Webcam: {webcamOn ? 'on' : 'off'}</p>
           <p>Mic: {micOn ? 'on' : 'off'}</p>
         </div>

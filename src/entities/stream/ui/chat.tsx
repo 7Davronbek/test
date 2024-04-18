@@ -1,24 +1,27 @@
 'use client'
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useCallback, useEffect, useState } from 'react'
 import { usePubSub } from '@videosdk.live/react-sdk'
 import sx from './style/chat.module.scss'
+import { useRouter } from 'next/navigation'
 
 const Chat = () => {
 
   const topic = 'CHAT'
   const [input, setInput] = useState('')
 
-
+  const router = useRouter()
 
   const { publish, messages } = usePubSub(topic, )
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     publish(input, { persist: true })
     setInput('')
+    router.refresh()
+
     // publish(inputRef.current.value, { persist: true })
     // inputRef.current.value = ''
-  }
+  }, [input, publish, router])
   useEffect(() => {
   }, [messages])
 

@@ -16,7 +16,7 @@ import { Loader, LocalstorageData, T_MED_DATA } from '@/shared'
 const HLSPlayer = () => {
   const { hlsUrls, hlsState } = useMeeting()
 
-  const playerRef = useRef<HTMLVideoElement>(null)
+  const playerRef = useRef(null)
 
   const hlsPlaybackHlsUrl = useMemo(() => hlsUrls.playbackHlsUrl, [hlsUrls])
 
@@ -33,7 +33,7 @@ const HLSPlayer = () => {
       const player = document.querySelector('#hlsPlayer')
 
       hls.loadSource(hlsPlaybackHlsUrl)
-      hls.attachMedia(player as HTMLMediaElement)
+      hls.attachMedia(player)
     } else {
       if (typeof playerRef.current?.play === 'function') {
         playerRef.current.src = hlsPlaybackHlsUrl
@@ -57,28 +57,23 @@ const HLSPlayer = () => {
 
 import sx from './style/chat.module.scss'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 const Viewer = ({ meetingId, setAppData }) => {
   const router = useRouter()
-  const [data] = useLocalStorage<LocalstorageData>(T_MED_DATA, { mode: '', meetingId: '', username: '' })
+  const [data] = useLocalStorage(T_MED_DATA, { mode: '', meetingId: '', username: '' })
   if (meetingId === null || meetingId === '') {
     router.push('/en/stream')
   }
   const handleClick = () => {
     setAppData({ meetingId: '', mode: '' })
     router.push('/en/stream')
+    router.refresh()
   }
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    <MeetingProvider  token={authToken!} config={{ meetingId, name: data.username!, mode: 'VIEWER' }}
+    <MeetingProvider  token={authToken} config={{ meetingId, name: data.username, mode: 'VIEWER' }}
       joinWithoutUserInteraction
     >
       <button onClick={handleClick}>back</button>
       <MeetingConsumer>
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-expect-error */}
         {({ hlsState }) =>
           hlsState === Constants.hlsEvents.HLS_PLAYABLE ? (
             <div className={sx.streamContainer}>
