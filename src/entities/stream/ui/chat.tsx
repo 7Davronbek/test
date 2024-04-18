@@ -39,7 +39,7 @@ const Chat = () => {
           )
         })}
       </div>
-      <form onSubmit={handleSubmit}>
+      <form style={{display: 'flex'}} onSubmit={handleSubmit}>
         <TextField fullWidth value={input} onChange={e => setInput(e.target.value)} type="text" />
         <button className={sx.button} type={'submit'}><BaseButton active={true} text={'Yuborish'} /></button>
       </form>
